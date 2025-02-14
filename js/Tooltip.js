@@ -1,12 +1,3 @@
-/**
- * Tooltip.js
- * A basic script that applies a mouseover tooltip functionality to all elements of a page that have a data-tooltip attribute
- * Matthias Schuetz, http://matthiasschuetz.com
- *
- * Copyright (C) Matthias Schuetz
- * Free to use under the MIT license
- */
-
 (function (root, factory) {
 	if (typeof define === "function" && define.amd) {
 		// AMD. Register as an anonymous module.
