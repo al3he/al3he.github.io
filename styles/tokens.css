@@ -1,0 +1,26 @@
+/* Design tokens from Figma variables/styles */
+:root {
+  --color-cover-bg: #3c444c;
+  --color-cover-text: #d0dbd4;
+  --color-deck-bg: #5f2b28;
+  --color-deck-text: #dedad7;
+  --color-card-light: #dedad7;
+  --color-card-pink: #cc53a2;
+  --color-card-dark: #88525f;
+  --color-card-border: #000;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-display: clamp(44px, 6.25vw, 90px);
+  --tracking-display: -0.03em;
+
+  --card-w: 150px;
+  --card-gap: 7px;
+  --card-radius: 10px;
+  --card-shadow: 0 4px 2px rgba(0, 0, 0, 0.25);
+  --flip-duration: 0.6s;
+}
+
+/* Mobile breakpoint: 4 cards per row */
+@media (max-width: 768px) {
+  :root { --card-w: calc((100vw - 32px - 20px - 3 * var(--card-gap)) / 4); }
+}

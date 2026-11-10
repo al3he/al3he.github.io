@@ -1,0 +1,99 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; font-family: var(--font-sans); }
+img { display: block; max-width: none; }
+button { font: inherit; color: inherit; }
+.view { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; }
+.view[hidden] { display: none; }
+
+/* ---------- 01 Cover ---------- */
+.cover { background: var(--color-cover-bg); color: var(--color-cover-text); }
+.project-header {
+  position: absolute; left: 33px; top: 41px; margin: 0;
+  width: 3.967em; height: 1.022em;
+  font: 400 var(--text-display) / 1 var(--font-sans);
+  letter-spacing: var(--tracking-display);
+}
+.ellipse-1 { position: absolute; inset: 36.96% 64.99% 20.65% 25.77%; }
+.ellipse-1 img { width: 100%; height: 100%; }
+.hero {
+  position: absolute; right: -4.16px; bottom: -17.42px;
+  width: min(57.05vw, 912.737px); aspect-ratio: 912.737 / 425.542;
+}
+.hero-shape { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(0.52deg); }
+.sd-favicon-icon { position: absolute; right: 12.95%; bottom: 39.1%; width: 16%; }
+.sd-favicon-icon img { width: 100%; height: auto; }
+
+/* ---------- 02.01 Deck ---------- */
+.deck-view { background: var(--color-deck-bg); color: var(--color-deck-text); }
+.back-button {
+  position: absolute; left: 38px; top: 39px; z-index: 5;
+  width: 66.3px; height: 64.9px; display: flex; align-items: center; justify-content: center;
+}
+.back-button img { width: 50.5px; height: 43.2px; transform: rotate(36.78deg); }
+.sickdays-header {
+  display: flex; justify-content: center; align-items: center;
+  height: 1.82em; padding-top: 43px; font-size: var(--text-display);
+}
+.sd-favicon { width: 0.878em; height: 0.689em; }
+.logo-text { margin: 0; font: 400 1em / 1 var(--font-sans); letter-spacing: var(--tracking-display); }
+.deck-frame { max-width: 1112px; margin: 3px auto 0; padding: 10px; }
+.deck {
+  --u: calc(var(--card-w) / 150);
+  display: flex; flex-wrap: wrap; gap: var(--card-gap); align-items: flex-start;
+}
+
+/* Hidden slots 4-7 keep their space (deck1=before) and fade in (deck1=after) */
+.deck > :nth-child(n+4) { visibility: hidden; opacity: 0; transition: opacity 0.4s, visibility 0s 0.4s; }
+.deck.is-expanded > :nth-child(n+4) { visibility: visible; opacity: 1; transition: opacity 0.4s var(--d, 0ms); }
+
+/* ---------- card (side + flip) ---------- */
+.card {
+  position: relative; flex: none; width: var(--card-w); aspect-ratio: 150 / 210;
+  padding: 0; border: 0; background: none; cursor: pointer; perspective: 800px;
+}
+.card__inner { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform var(--flip-duration); }
+.card.is-flipped .card__inner { transform: rotateY(180deg); }
+.card__back, .card__front {
+  position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden;
+  background: var(--color-card-light); border: 0.5px solid var(--color-card-border);
+  border-radius: var(--card-radius); box-shadow: var(--card-shadow);
+}
+.card__front { transform: rotateY(180deg); }
+.card[data-back="pink"] .card__back { background: var(--color-card-pink); }
+.card__back img { position: absolute; left: 0; top: 50%; width: 100%; height: 97.6%; transform: translateY(-50%); object-fit: cover; }
+.card__front img { position: absolute; object-fit: cover; }
+.card[data-face="math"] .card__front img { left: 8%; top: 8.1%; width: 84%; height: 83.8%; }
+.card[data-face="queen"] .card__front img { left: 8.2%; top: 4.3%; width: 83.3%; height: 91%; border-radius: var(--card-radius); }
+
+/* ---------- pair (start -> final) ---------- */
+.pair { position: relative; flex: none; width: var(--card-w); height: calc(var(--u) * 266); transition: height 0.5s; }
+.back-dark {
+  position: absolute; left: 0; top: 0; z-index: 2; width: 100%; aspect-ratio: 150 / 210; padding: 0; cursor: pointer;
+  background: var(--color-card-dark); border: 0.5px solid var(--color-card-border);
+  border-radius: var(--card-radius); box-shadow: var(--card-shadow);
+  transition: transform 0.5s, opacity 0.5s;
+}
+.union { position: absolute; container-type: size; display: flex; align-items: center; justify-content: center; }
+.union--a { inset: 61.43% 6.35% 4.66% 53.33%; }
+.union--a img { flex: none; width: 100cqh; height: 100cqw; transform: rotate(90deg); }
+.union--b { inset: 4.29% 45.85% 66.91% 6.67%; }
+.union--b img { width: 100cqw; height: 100cqh; transform: scaleX(-1); }
+.pair__pink { position: absolute; left: 0; top: calc(var(--u) * 56); transition: top 0.5s; }
+.pair[data-state="final"] { height: calc(var(--u) * 210); }
+.pair[data-state="final"] .back-dark { transform: translateY(-110%); opacity: 0; pointer-events: none; }
+.pair[data-state="final"] .pair__pink { top: 0; }
+
+:focus-visible { outline: 2px solid var(--color-card-pink); outline-offset: 3px; }
+
+/* ---------- mobile (768px) ---------- */
+@media (max-width: 768px) {
+  .project-header { left: 16px; top: 24px; }
+  .hero { width: 130vw; right: -25vw; bottom: -4vw; }
+  .sd-favicon-icon { right: 30%; bottom: 36%; width: 22%; }
+  .back-button { left: 8px; top: 12px; }
+  .sickdays-header { padding-top: 24px; }
+  .deck-frame { padding: 10px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
