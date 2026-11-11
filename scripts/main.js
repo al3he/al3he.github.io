@@ -3,8 +3,8 @@
   // Add more names here (and in IMG) to get real randomness.
   const FACES = ["math"];
   const IMG = {
-    queen: { src: "assets/image-17.png", alt: "Queen of diamonds" },
-    math:  { src: "assets/image-20.png", alt: "Math card" },
+    queen: { src: "assets/image-20.png", alt: "Queen of diamonds" },
+    math:  { src: "assets/image-17.png", alt: "Math card" },
   };
 
   const cover = document.getElementById("cover-view");
